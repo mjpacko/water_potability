@@ -1,24 +1,23 @@
 import pandas as pd
 import numpy as np
-from sklearn.preprocessing import MinMaxScaler
+from sklearn.base import TransformerMixin
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-def normalize(train: pd.DataFrame, test: pd.DataFrame, Function=MinMaxScaler) -> tuple[pd.DataFrame, pd.DataFrame]:
+def normalize(train: pd.DataFrame, test: pd.DataFrame, normalizer: TransformerMixin) -> tuple[pd.DataFrame, pd.DataFrame]:
     """
     Normalize the data using the given scaler function.
 
     Parameters:
         train (pd.DataFrame): Training data.
         test (pd.DataFrame): Testing data.
-        Function (function): Scaler function to use.
+        normalizer (TransformerMixin): Normalizer function.
 
     Returns:
         tuple[pd.DataFrame, pd.DataFrame]: Normalized training and testing data.
     """
 
     # Fit the normalizer on the training data
-    normalizer = Function()
     normalizer.fit(train)
 
     # Transform the training and testing data
